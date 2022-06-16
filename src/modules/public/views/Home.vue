@@ -58,13 +58,15 @@ const { data, fetching, error } = useQuery<{
 </script>
 
 <template>
-  <h3>What's Popular</h3>
-  <h2 class="text-3xl font-bold">Movies</h2>
-  <template v-if="!fetching && data?.getNowPlayingMovies.results">
-    <CarouselItems :items="data.getNowPlayingMovies.results" type="MOVIE" />
-  </template>
-  <h2 class="text-3xl font-bold">Shows</h2>
-  <template v-if="!fetching && data?.getShowsInAiring.results">
-    <CarouselItems :items="data.getShowsInAiring.results" type="TV" />
-  </template>
+  <section class="app-container">
+    <h3>What's Popular</h3>
+    <h2 class="text-3xl font-bold">Movies</h2>
+    <template v-if="!fetching && data?.getNowPlayingMovies.results">
+      <CarouselItems :items="data.getNowPlayingMovies.results" type="MOVIE" />
+    </template>
+    <h2 class="text-3xl font-bold">Shows</h2>
+    <template v-if="!fetching && data?.getShowsInAiring.results">
+      <CarouselItems :items="data.getShowsInAiring.results" type="TV" />
+    </template>
+  </section>
 </template>

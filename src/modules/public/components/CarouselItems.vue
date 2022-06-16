@@ -34,15 +34,11 @@ const swiperOptions: SwiperOptions = {
   },
 }
 
-const onSwiper = (swiper: any) => {
-  console.log(swiper)
-}
 </script>
 
 <template>
   <swiper
     :breakpoints="swiperOptions.breakpoints"
-    @swiper="onSwiper"
     wrapper-tag="ul"
   >
     <swiper-slide v-for="item in items" :key="item.id">
