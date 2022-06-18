@@ -4,6 +4,6 @@
 
 @layer components {
   .app-container {
-    @apply mx-auto max-w-[1000px] p-5 md:p-0;
+    @apply mx-auto max-w-[1000px] px-5;
   }
 }

@@ -134,7 +134,7 @@ onUpdated(async () => {
 
 <template>
   <template v-if="data?.getMovie">
-    <div class="relative min-h-[400px] md:min-h-[500px]">
+    <div class="relative min-h-[350px] md:min-h-[450px]">
       <img
         class="absolute z-0 object-cover object-top w-full h-full"
         :src="backdropImage"
@@ -144,19 +144,21 @@ onUpdated(async () => {
         class="absolute top-0 left-0 z-10 w-full h-full opacity-80 brightness-[0.3]"
         :style="{ backgroundColor: backdropAvgColor }"
       ></div>
-      <div class="relative top-0 left-0 z-20 w-full h-full app-container">
-        <div class="z-20 w-full grid grid-cols-6 gap-4">
-          <div class="col-span-4">
+      <div class="relative z-20 w-full h-full py-5 md:py-10 app-container">
+        <div class="z-20 w-full grid grid-cols-6 gap-4 md:gap-16">
+          <div class="self-center order-1 md:self-start md:order-2 col-span-4">
             <div class="w-full md:w-3/4">
               <h1 class="text-xl font-bold text-gray-200 md:text-3xl leading-6">
                 {{ film?.title }}
               </h1>
               <div class="mt-2 text-gray-300 leading-6">
-                <span class="block text-sm">DIRECTED BY</span>
-                <strong class="block text-md">{{ director?.name }}</strong>
+                <span class="block text-sm md:text-md">DIRECTED BY</span>
+                <strong class="block text-md md:text-lg">{{
+                  director?.name
+                }}</strong>
               </div>
-              <div class="flex justify-between mt-2 text-md">
-                <p class="text-sm text-gray-300">
+              <div class="flex mt-2 space-x-10">
+                <p class="text-sm text-gray-300 md:text-lg">
                   {{ film?.release_date?.toString().slice(0, 4) }}&nbsp;&nbsp;
                   {{ film?.runtime }} mins
                 </p>
@@ -164,19 +166,31 @@ onUpdated(async () => {
                   v-if="trailerUrl"
                   :href="trailerUrl"
                   target="_blank"
-                  class="text-sm font-bold text-gray-200"
+                  class="text-sm font-bold text-gray-200 md:text-lg"
                   >TRAILER</a
                 >
               </div>
             </div>
+            <div class="hidden md:block">
+              <p
+                class="mt-2 text-sm font-bold text-gray-300 uppercase md:mt-6 md:text-lg"
+              >
+                {{ film?.tagline }}
+              </p>
+              <p
+                class="mt-2 text-sm text-gray-200 md:text-lg leading-5 md:leading-6"
+              >
+                {{ film?.overview }}
+              </p>
+            </div>
           </div>
           <img
-            class="h-full col-span-2"
+            class="order-2 aspect-[1/1.5] rounded md:h-auto md:order-1 col-span-2"
             :src="getPoster(film?.poster_path!)"
             :alt="data.getMovie.title"
           />
         </div>
-        <div class="mt-3">
+        <div class="block mt-3 md:hidden">
           <p class="mt-2 text-sm font-bold text-gray-300 uppercase">
             {{ film?.tagline }}
           </p>
