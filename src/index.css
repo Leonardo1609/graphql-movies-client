@@ -7,3 +7,7 @@
     @apply mx-auto max-w-[1000px] px-5;
   }
 }
+
+#nprogress .bar {
+  background: rgb(132, 204, 22) !important;
+}

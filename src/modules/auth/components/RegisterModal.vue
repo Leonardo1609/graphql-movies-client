@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { object, string, AnySchema } from 'yup'
 import { useForm } from '../../../composables/useForm'
+import { useAuthStore } from '../store'
 
+const authStore = useAuthStore()
 const emit = defineEmits<{
   (e: 'on-close'): void
 }>()
@@ -29,8 +31,11 @@ const { values, errors, handleSumit } = useForm<IRegisterForm>(
   registerSchema
 )
 
-const onSubmit = (data: IRegisterForm) => {
-  console.log(data)
+const onSubmit = async ({ username, password, email }: IRegisterForm) => {
+  const resp = await authStore.registerUser(username, password, email)
+  if (!resp.error) {
+    emit('on-close')
+  }
 }
 </script>
 
@@ -39,7 +44,7 @@ const onSubmit = (data: IRegisterForm) => {
     class="absolute bg-gray-600/75 h-screen w-screen grid place-items-center z-[100] top-0 left-0 px-5"
     @click.self="emit('on-close')"
   >
-    <div class="w-full px-10 py-5 bg-gray-800 rounded-xl h-100">
+    <div class="w-full px-10 py-5 bg-gray-800 rounded-xl h-100 max-w-[500px]">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-2xl font-light text-gray-300 uppercase">
           Join MovieGraph

@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import Layout from './components/Layout.vue'
+import { useAuthStore } from './modules/auth/store'
+
+const authStore = useAuthStore()
+authStore.verifyUser()
 </script>
 
 <template>

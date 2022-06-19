@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
     name: 'showPage',
     component: () => import('../views/ShowPage.vue'),
   },
+  {
+    path: 'search/:type/:text',
+    name: 'search',
+    component: () => import('../views/Search.vue'),
+  },
 ]
 
 export default routes
