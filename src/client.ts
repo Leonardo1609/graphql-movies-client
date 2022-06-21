@@ -9,8 +9,10 @@ import {
   Operation,
   TypedDocumentNode,
 } from '@urql/vue'
+import { ref } from 'vue'
 import { useToast } from 'vue-toastification'
 
+const firstAppErrorLoad = ref(true)
 const toast = useToast()
 
 export const client = createClient({
@@ -18,8 +20,16 @@ export const client = createClient({
   exchanges: [
     dedupExchange,
     errorExchange({
-      onError: (error: CombinedError, operation: Operation) => {
-        toast.error(error.message.replace('[GraphQL] ', ''))
+      onError: (error: CombinedError) => {
+        if (
+          !(
+            firstAppErrorLoad.value &&
+            error.message === '[GraphQL] Unauthorized'
+          )
+        ) {
+          toast.error(error.message.replace('[GraphQL] ', ''))
+          firstAppErrorLoad.value = false
+        }
       },
     }),
     authExchange<{ token: string }>({
@@ -67,9 +77,9 @@ export const client = createClient({
   },
 })
 
-export const query = <T>(
-  query: TypedDocumentNode<any, object>,
-  variables: object = {}
+export const query = <T = any, V = object>(
+  query: TypedDocumentNode<T, V>,
+  variables?: V
 ) => {
   return client.query<T>(query, variables).toPromise()
 }

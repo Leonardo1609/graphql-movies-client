@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useSearch } from '../store/useSearch'
 
 const emit = defineEmits<{
   (e: 'on-close'): void
 }>()
 
+const searchStore = useSearch()
 const searchRef = ref<HTMLInputElement>()
 
-onMounted(() => {
-  searchRef.value?.focus()
-})
-
 const searchText = ref('')
-const searchOption = ref('film')
+const searchOption = ref(searchStore.type === 'MOVIE' ? 'film' : 'show')
 
 const router = useRouter()
 const handleSearch = () => {
@@ -28,6 +26,11 @@ const handleSearch = () => {
     emit('on-close')
   }
 }
+
+onMounted(() => {
+  searchRef.value?.focus()
+})
+
 </script>
 
 <template>

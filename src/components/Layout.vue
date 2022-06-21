@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Directive, ref } from 'vue'
+import { Directive, ref, watch } from 'vue'
 import { useAuthStore } from '../modules/auth/store'
 import { storeToRefs } from 'pinia'
 import RegisterModal from '../modules/auth/components/RegisterModal.vue'
@@ -7,14 +7,20 @@ import LoginModal from '../modules/auth/components/LoginModal.vue'
 import SearchModal from '../modules/public/components/SearchModal.vue'
 import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
+import { useSearch } from '../modules/public/store/useSearch'
 
 const router = useRouter()
 const toast = useToast()
 const authStore = useAuthStore()
+const searchStore = useSearch()
 const { authenticated, user } = storeToRefs(authStore)
 
 const searchText = ref('')
 const searchOption = ref('film')
+
+watch(searchStore, (currentValue) => {
+  searchOption.value = currentValue.type === 'MOVIE' ? 'film' : 'show'
+})
 
 const isLoginModalOpen = ref(false)
 const isRegisterModalOpen = ref(false)
