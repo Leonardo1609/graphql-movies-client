@@ -8,13 +8,13 @@ import { gql } from '@urql/core'
 import { useQuery } from '@urql/vue'
 import { useRoute } from 'vue-router'
 import { getBackdrop, getPoster } from '../../../helpers/items'
-import { computed, onMounted, onUpdated, ref, watch } from 'vue'
+import { computed, onUpdated, ref, watch } from 'vue'
 import FastAverageColor from 'fast-average-color'
 const fac = new FastAverageColor()
 
 const route = useRoute()
 
-const { data, fetching, error, resume } = useQuery<{
+const { data, fetching, error } = useQuery<{
   getMovie: IMovie
   getCredits: ICreditsResp
   getVideos: IVideosResp
@@ -75,7 +75,6 @@ const { data, fetching, error, resume } = useQuery<{
     movieId: parseInt(route.params.id.toString()),
     type: 'MOVIE',
   },
-  pause: true,
 })
 
 const backdropImage = ref<string>('')
@@ -113,10 +112,6 @@ const trailerUrl = computed(() => {
   return `https://www.youtube.com/watch?v=${trailer.key}`
 })
 
-onMounted(async () => {
-  resume()
-})
-
 // This watcher only runs once
 watch(overview, (current) => {
   if (current) {
@@ -127,7 +122,10 @@ watch(overview, (current) => {
 onUpdated(async () => {
   if (data.value?.getMovie) {
     backdropImage.value = getBackdrop(data?.value?.getMovie.backdrop_path!)
-    backdropAvgColor.value = (await fac.getColorAsync(backdropImage.value)).hexa
+    if (backdropImage.value)
+      backdropAvgColor.value = (
+        await fac.getColorAsync(backdropImage.value)
+      ).hexa
   }
 })
 </script>

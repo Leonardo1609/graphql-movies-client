@@ -37,7 +37,7 @@ watch(route, async (currentValue) => {
   if (!currentValue.params.type || !currentValue.params.text) return
   typeItem.value = currentValue.params.type.toString()
   textSearch.value = currentValue.params.text.toString()
-  searchStore.setTypeAndQuery(itemType.value, textSearch.value)
+  searchStore.fetchTypeAndQuery(itemType.value, textSearch.value)
 })
 
 // Intersection Observer
@@ -69,7 +69,7 @@ watch(loadingRef, (currentValue) => {
 
 // Mounted
 onMounted(() => {
-  searchStore.setTypeAndQuery(itemType.value, textSearch.value)
+  searchStore.fetchTypeAndQuery(itemType.value, textSearch.value)
 })
 </script>
 

@@ -7,13 +7,14 @@ const emit = defineEmits<{
   (e: 'on-close'): void
 }>()
 
+const router = useRouter()
+
 const searchStore = useSearch()
 const searchRef = ref<HTMLInputElement>()
 
 const searchText = ref('')
 const searchOption = ref(searchStore.type === 'MOVIE' ? 'film' : 'show')
 
-const router = useRouter()
 const handleSearch = () => {
   if (searchText.value.trim()) {
     router.push({
@@ -30,7 +31,6 @@ const handleSearch = () => {
 onMounted(() => {
   searchRef.value?.focus()
 })
-
 </script>
 
 <template>

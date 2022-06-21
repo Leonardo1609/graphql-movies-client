@@ -83,7 +83,7 @@ export const useSearch = defineStore('search', {
       this.page = this.page + 1
       this.getFounds()
     },
-    setTypeAndQuery(type: MovieOrShow, query: string) {
+    fetchTypeAndQuery(type: MovieOrShow, query: string) {
       this.page = 1
       this.type = type
       this.queryText = query
