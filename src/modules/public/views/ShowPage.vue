@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ItemPageHeader from '../components/ItemPageHeader.vue'
 import SkeletonItemPageHeader from '../components/skeletons/SkeletonItemPageHeader.vue'
+import RecordButton from '../components/RecordButton.vue'
 import {
   ICreditsResp,
   IShow,
@@ -26,8 +27,8 @@ const { data, fetching, error } = useQuery<{
         id
         poster_path
         first_air_date
-	overview
-	tagline
+        overview
+        tagline
         name
         genres {
           id
@@ -103,6 +104,10 @@ const trailerUrl = computed(() => {
       :trailerUrl="trailerUrl"
     />
     <main class="w-full app-container"></main>
+    <RecordButton
+      :item-id="show.id!"
+      class="fixed block md:none bottom-16 right-5"
+    />
   </template>
   <SkeletonItemPageHeader v-if="fetching" />
 </template>

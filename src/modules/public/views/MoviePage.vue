@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import RecordButton from '../components/RecordButton.vue'
 import ItemPageHeader from '../components/ItemPageHeader.vue'
 import SkeletonItemPageHeader from '../components/skeletons/SkeletonItemPageHeader.vue'
+import RecordButton from '../components/RecordButton.vue'
 import {
   ICreditsResp,
   IMovie,
@@ -11,6 +11,7 @@ import { computed } from 'vue'
 import { gql } from '@urql/core'
 import { useQuery } from '@urql/vue'
 import { useRoute } from 'vue-router'
+import RecordModal from '../components/RecordModal.vue'
 
 const route = useRoute()
 
@@ -116,6 +117,7 @@ const trailerUrl = computed(() => {
       :item-id="film.id!"
       class="fixed block md:none bottom-16 right-5"
     />
+    <RecordModal :item="film" />
   </template>
   <SkeletonItemPageHeader v-if="fetching" />
 </template>

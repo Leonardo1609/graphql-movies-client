@@ -1,5 +1,5 @@
 import { SchemaOf, ValidationError } from 'yup'
-import { reactive } from 'vue'
+import { reactive, UnwrapNestedRefs } from 'vue'
 
 export const useForm = <T extends {}>(
   initialValues: T,
@@ -16,14 +16,19 @@ export const useForm = <T extends {}>(
   }
 
   const handleSumit = async (
-    callBack: (data: Awaited<SchemaOf<T, never>['__outputType']>) => any
+    callBack: (
+      data: UnwrapNestedRefs<T> | Awaited<SchemaOf<T, never>['__outputType']>
+    ) => any
   ) => {
     try {
-      const resp = await schema.validate(form, {
-        abortEarly: false,
-      })
-      resetErrors()
-      callBack(resp)
+      if (schema) {
+        const resp = await schema.validate(form, {
+          abortEarly: false,
+        })
+        resetErrors()
+        callBack(resp)
+      }
+      callBack(form)
     } catch (err) {
       if (err instanceof ValidationError) {
         resetErrors()

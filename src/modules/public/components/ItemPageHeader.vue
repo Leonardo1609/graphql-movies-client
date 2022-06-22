@@ -39,16 +39,19 @@ onMounted(async () => {
 
 <template>
   <div class="relative min-h-[350px] md:min-h-[450px]">
+    <!-- Background Image -->
     <img
       class="absolute z-0 object-cover object-top w-full h-full"
       :src="backdropImage"
       :alt="item?.title || item?.name"
       v-if="backdropImage"
     />
+    <!-- Background Avg Color -->
     <div
       class="absolute top-0 left-0 z-10 w-full h-full opacity-80 brightness-[0.3]"
       :style="{ backgroundColor: backdropAvgColor }"
     ></div>
+    <!-- Main Content -->
     <div class="relative z-20 w-full h-full py-5 md:py-10 app-container">
       <div class="z-20 w-full grid grid-cols-6 gap-4 md:gap-16">
         <div
@@ -99,7 +102,7 @@ onMounted(async () => {
         <img
           v-if="item.poster_path"
           class="order-2 aspect-[1/1.5] rounded md:h-auto md:order-1 col-span-2"
-          :src="getPoster(item.poster_path)"
+          :src="getPoster(item.poster_path) || ''"
           :alt="item.title"
         />
         <div

@@ -7,6 +7,7 @@ import 'swiper/css/scrollbar'
 import 'vue-toastification/dist/index.css'
 import '../node_modules/nprogress/nprogress.css'
 import App from './App.vue'
+import StarRating from 'vue-star-rating'
 import VueToast, { PluginOptions, POSITION } from 'vue-toastification'
 import router from './routes'
 import urql from '@urql/vue'
@@ -44,11 +45,13 @@ const vClickOutside: Directive = {
   },
 }
 app.directive('click-outside', vClickOutside)
+app
+  .component('font-awesome-icon', FontAwesomeIcon)
+  .component('stars-rating', StarRating)
 
 app
   .use(VueToast, toastOptions)
   .use(pinia)
   .use(urql, client)
   .use(router)
-  .component('font-awesome-icon', FontAwesomeIcon)
   .mount('#app')
