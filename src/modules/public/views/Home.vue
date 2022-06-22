@@ -5,6 +5,7 @@ import {
   IShowsInAiringResp,
 } from '../../../interfaces/movieApi.interfaces'
 import CarouselItems from '../components/CarouselItems.vue'
+import SkeletonCarousel from '../components/skeletons/SkeletonCarousel.vue'
 
 const { data, fetching, error } = useQuery<{
   getNowPlayingMovies: INowPlayingMoviesResp
@@ -58,15 +59,20 @@ const { data, fetching, error } = useQuery<{
 </script>
 
 <template>
-  <section class="app-container">
-    <h3>What's Popular</h3>
-    <h2 class="text-3xl font-bold">Movies</h2>
+  <section class="py-5 md:py-10 app-container">
+    <h3 class="mb-4 text-lg font-bold text-gray-200 md:text-2xl">
+      What's Popular in Theaters
+    </h3>
     <template v-if="!fetching && data?.getNowPlayingMovies.results">
       <CarouselItems :items="data.getNowPlayingMovies.results" type="MOVIE" />
     </template>
-    <h2 class="text-3xl font-bold">Shows</h2>
+    <SkeletonCarousel v-if="fetching" />
+    <h3 class="mt-6 mb-4 text-lg font-bold text-gray-200 md:mt-10 md:text-2xl">
+      What's Popular on TV
+    </h3>
     <template v-if="!fetching && data?.getShowsInAiring.results">
       <CarouselItems :items="data.getShowsInAiring.results" type="TV" />
     </template>
+    <SkeletonCarousel v-if="fetching" />
   </section>
 </template>

@@ -111,7 +111,6 @@ const { isNavbarOpen } = storeToRefs(headerStore)
         <ul class="p-2 text-sm uppercase">
           <li class="py-1">Top 250 Films</li>
           <li class="py-1">Popular</li>
-          <li class="py-1">Search</li>
         </ul>
       </li>
       <li class="w-full uppercase">
@@ -122,7 +121,6 @@ const { isNavbarOpen } = storeToRefs(headerStore)
         <ul class="p-2 text-sm uppercase">
           <li class="py-1">Top 250 Shows</li>
           <li class="py-1">Popular</li>
-          <li class="py-1">Search</li>
         </ul>
       </li>
     </ul>

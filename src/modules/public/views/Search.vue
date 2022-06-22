@@ -6,6 +6,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useSearch } from '../store/useSearch'
+import SkeletonCardList from '../components/skeletons/SkeletonCardList.vue'
 
 // Search tore
 const searchStore = useSearch()
@@ -75,7 +76,10 @@ onMounted(() => {
 
 <template>
   <section class="app-container">
-    <h2 class="inline-block my-8 text-xl font-bold text-gray-200">
+    <h2
+      class="inline-block my-8 text-xl font-bold text-gray-200"
+      v-if="!fetchingFirst"
+    >
       FOUND AT LEAST {{ totalResults }} MATCHES FOR “{{
         textSearch.toUpperCase()
       }}”
@@ -93,5 +97,6 @@ onMounted(() => {
         <LoadingSpinner />
       </div>
     </div>
+    <SkeletonCardList v-if="fetchingFirst" class="py-5" />
   </section>
 </template>
