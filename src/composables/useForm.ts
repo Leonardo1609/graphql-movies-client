@@ -3,7 +3,7 @@ import { reactive, UnwrapNestedRefs } from 'vue'
 
 export const useForm = <T extends {}>(
   initialValues: T,
-  schema: SchemaOf<T>
+  schema?: SchemaOf<T>
 ) => {
   const form = reactive({ ...initialValues })
   const errors = reactive({ ...initialValues })

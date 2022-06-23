@@ -105,6 +105,7 @@ const trailerUrl = computed(() => {
 </script>
 
 <template>
+  <SkeletonItemPageHeader v-if="fetching" />
   <template v-if="film && !fetching">
     <ItemPageHeader
       :date="film?.release_date?.toString().slice(0, 4)"
@@ -115,11 +116,10 @@ const trailerUrl = computed(() => {
     <main class="w-full app-container"></main>
     <RecordButton
       :item-id="film.id!"
-      class="fixed block md:none bottom-16 right-5"
+      class="fixed block md:hidden bottom-16 right-5"
     />
     <RecordModal :item="film" />
   </template>
-  <SkeletonItemPageHeader v-if="fetching" />
 </template>
 
 <style scoped></style>
