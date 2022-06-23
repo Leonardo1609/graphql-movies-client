@@ -55,12 +55,12 @@ const onSubmit = (data: IRecord) => {
     class="absolute bg-gray-600/75 h-screen w-screen grid place-items-center z-[100] top-0 left-0 px-5"
     @click.self="emit('on-close')"
   >
-    <div class="w-full px-5 py-5 bg-gray-800 rounded h-100 max-w-[500px]">
+    <div class="w-full px-5 py-5 bg-gray-800 rounded max-w-[500px]">
       <div class="flex items-center justify-between mb-3 space-x-5">
         <div class="flex space-x-4">
           <img
             v-if="item.poster_path"
-            class="aspect-[1/1.5] rounded md:h-auto col-span-2 max-w-[60px] h-100"
+            class="aspect-[1/1.5] rounded md:h-auto col-span-2 max-w-[60px] h-full"
             :src="getPoster(item.poster_path) || ''"
             :alt="item.title || item.name"
           />
@@ -82,7 +82,7 @@ const onSubmit = (data: IRecord) => {
       </div>
       <form @submit.prevent="handleSumit(onSubmit)">
         <!-- Status icons -->
-        <div class="flex justify-around py-3">
+        <div class="flex justify-around py-3 md:justify-center md:space-x-10">
           <!-- Watched -->
           <div
             class="flex flex-col text-sm text-center text-gray-200 space-y-2"

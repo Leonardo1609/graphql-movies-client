@@ -5,11 +5,15 @@ import {
   MovieOrShow,
 } from '../../../interfaces/movieApi.interfaces'
 import { getPoster } from '../../../helpers/items'
+import { computed } from 'vue'
 
-defineProps<{
+const { item } = defineProps<{
   item: IMovie & IShow
-  type: MovieOrShow
 }>()
+
+const type = computed<MovieOrShow>(() => {
+  return item.title ? 'MOVIE' : 'TV'
+})
 </script>
 
 <template>
@@ -25,7 +29,7 @@ defineProps<{
       <img
         v-if="item.poster_path"
         class="w-full h-full"
-        :src="getPoster(item.poster_path)"
+        :src="getPoster(item.poster_path) || ''"
         :alt="item.title || item.name"
       />
       <div

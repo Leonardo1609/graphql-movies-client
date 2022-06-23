@@ -49,7 +49,7 @@ const onSubmit = async ({ email, password }: ILoginForm) => {
     class="absolute bg-gray-600/75 h-screen w-screen grid place-items-center z-[100] top-0 left-0 px-5"
     @click.self="emit('on-close')"
   >
-    <div class="w-full px-10 py-5 bg-gray-800 rounded-xl h-100 max-w-[500px]">
+    <div class="w-full px-10 py-5 bg-gray-800 rounded-xl max-w-[500px]">
       <div class="flex items-center justify-between mb-8">
         <h2 class="text-2xl font-light text-gray-300 uppercase">Login</h2>
         <button @click="emit('on-close')">
@@ -90,7 +90,7 @@ const onSubmit = async ({ email, password }: ILoginForm) => {
         </div>
         <button
           type="submit"
-          class="px-10 py-2 mt-5 font-bold text-gray-200 uppercase bg-green-600 rounded"
+          class="px-10 py-2 mt-2 font-bold text-gray-200 uppercase bg-green-600 rounded"
         >
           Sing in
         </button>

@@ -101,7 +101,7 @@ const onSubmit = async ({ username, password, email }: IRegisterForm) => {
         </div>
         <button
           type="submit"
-          class="px-10 py-2 mt-5 font-bold text-gray-200 uppercase bg-green-600 rounded"
+          class="px-10 py-2 mt-2 font-bold text-gray-200 uppercase bg-green-600 rounded"
         >
           Sing up
         </button>
